@@ -1,0 +1,30 @@
+name: mastermindiOSGame
+options:
+  bundleIdPrefix: com.big-bear
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "26.0"
+
+targets:
+  MastermindGame:
+    type: application
+    platform: iOS
+    sources:
+      - MastermindGame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.mastermindgame
+        SWIFT_VERSION: "5.9"
+        GENERATE_INFOPLIST_FILE: YES
+
+  MastermindGameTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - MastermindGameTests
+    dependencies:
+      - target: MastermindGame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.mastermindgameTests
+        GENERATE_INFOPLIST_FILE: YES
