@@ -14,6 +14,10 @@ struct RootView: View {
                     SuccessView {
                         coordinator.restartGame()
                     }
+                case .gameOver(let secret):
+                    GameOverView(secret: secret) {
+                        coordinator.restartGame()
+                    }
                 }
             }
         }

@@ -24,6 +24,7 @@ struct GameView: View {
                             activeRow.id("active")
                         }
                     }
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                 }
@@ -36,6 +37,7 @@ struct GameView: View {
                     }
                 }
                 .onAppear {
+                    viewModel.startGame()
                     focusedIndex = 0
                 }
             }
@@ -51,6 +53,7 @@ struct GameView: View {
             inputBoxRow
             checkButton
         }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 
     private func binding(for index: Int) -> Binding<String> {
@@ -76,12 +79,15 @@ extension GameView {
         return HStack {
             VStack(alignment: .leading, spacing: 2) {
                 Text("MASTERMIND")
-                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .font(.system(size: 34, weight: .black, design: .rounded))
                 Text("Guess the 4-letter code")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
+
             Spacer()
+
+            TimerView(remaining: viewModel.remainingTime, total: viewModel.maxGameDurationInSeconds)
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)
@@ -95,7 +101,6 @@ extension GameView {
                     .focused($focusedIndex, equals: index)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func completedRow(_ row: [LetterBox]) -> some View {
@@ -104,7 +109,6 @@ extension GameView {
                 ResultLetterBoxView(letter: box.letter, result: box.result)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var checkButton: some View {
@@ -122,5 +126,6 @@ extension GameView {
         }
         .disabled(!allFilled)
         .animation(.easeInOut(duration: 0.15), value: allFilled)
+        .padding(.top, 16)
     }
 }

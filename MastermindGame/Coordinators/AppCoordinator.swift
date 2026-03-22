@@ -8,6 +8,7 @@ final class AppCoordinator: ObservableObject {
     enum Route: Hashable {
         case game
         case succes
+        case gameOver(secret: String)
     }
 
     @Published var navigationPath = NavigationPath()
@@ -15,8 +16,8 @@ final class AppCoordinator: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(gameService: GameServiceProtocol = GameService()) {
-        self.gameViewModel = GameViewModel(gameService: gameService)
+    init(gameService: GameServiceProtocol = GameService(), timerService: TimerServiceProtocol = TimerService()) {
+        self.gameViewModel = GameViewModel(gameService: gameService, timerService: timerService)
         observeGameState()
     }
 
@@ -27,7 +28,7 @@ final class AppCoordinator: ObservableObject {
     func restartGame() {
         cancellables.removeAll()
         navigationPath = NavigationPath()
-        gameViewModel = GameViewModel(gameService: GameService())
+        gameViewModel = GameViewModel(gameService: GameService(), timerService: TimerService())
         observeGameState()
     }
 
@@ -41,7 +42,7 @@ final class AppCoordinator: ObservableObject {
                 case .won:
                     navigationPath.append(Route.succes)
                 case .gameOver:
-                    print("==== Damn we lost")
+                    navigationPath.append(Route.gameOver(secret: gameViewModel.secret))
                 case .playing:
                     break
                 }
