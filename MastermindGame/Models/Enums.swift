@@ -8,5 +8,5 @@ enum GuessResult: Equatable {
 enum GameState: Equatable {
     case playing
     case won
-    case lost
+    case gameOver
 }

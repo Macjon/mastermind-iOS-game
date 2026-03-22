@@ -10,6 +10,10 @@ struct RootView: View {
                 switch route {
                 case .game:
                     GameView(viewModel: coordinator.gameViewModel)
+                case .succes:
+                    SuccessView {
+                        coordinator.restartGame()
+                    }
                 }
             }
         }
