@@ -16,6 +16,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.mastermindgame
         SWIFT_VERSION: "5.9"
         GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait"
 
   MastermindGameTests:
     type: bundle.unit-test
