@@ -3,7 +3,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-final class AppCoordinator: ObservableObject {
+final class AppCoordinator: ObservableObject, AppRouter {
 
     enum Route: Hashable {
         case game
@@ -11,7 +11,7 @@ final class AppCoordinator: ObservableObject {
 
     @Published var navigationPath = NavigationPath()
 
-    func startGame() {
-        navigationPath.append(Route.game)
+    func navigate(to route: Route) {
+        navigationPath.append(route)
     }
 }
