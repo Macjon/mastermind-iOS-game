@@ -2,6 +2,8 @@ import SwiftUI
 
 struct StartView: View {
 
+    let onStart: () -> Void
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -48,7 +50,7 @@ struct StartView: View {
             Spacer()
 
             Button {
-                // TODO: goto start screen
+                onStart()
             } label: {
                 Text("START GAME")
                     .font(.system(size: 17, weight: .bold, design: .rounded))
@@ -81,5 +83,5 @@ fileprivate struct RuleRow: View {
 }
 
 #Preview {
-    StartView()
+    StartView(onStart: {})
 }
