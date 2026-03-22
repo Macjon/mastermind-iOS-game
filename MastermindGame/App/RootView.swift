@@ -9,7 +9,7 @@ struct RootView: View {
                 .navigationDestination(for: AppCoordinator.Route.self) { route in
                 switch route {
                 case .game:
-                    GameView()
+                    GameView(viewModel: coordinator.gameViewModel)
                 }
             }
         }
